@@ -94,7 +94,7 @@ function removeEmpty (obj) {
 }
 
 function runNewman (options) {
-  console.log(options);
+  core.warning(options);
   newman.run(options, (err) => {
     if (err) {
       core.setFailed('Newman run failed!! ' + (err || ''))
