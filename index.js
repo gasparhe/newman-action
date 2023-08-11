@@ -54,8 +54,9 @@ async function init () {
       }
       options.environment = `${apiBase}/environments/${options.environment}?apikey=${options.apiKey}`
     }
-
-    runNewman(removeEmpty(options))
+    
+    const filteredOptions = removeEmpty(options)
+    runNewman(filteredOptions)
   } catch (error) {
     core.setFailed(error.message)
   }
@@ -93,9 +94,10 @@ function removeEmpty (obj) {
 }
 
 function runNewman (options) {
+  console.log(options);
   newman.run(options, (err) => {
     if (err) {
-      core.setFailed('Newman run failed! ' + (err || ''))
+      core.setFailed('Newman run failed!! ' + (err || ''))
     }
   }).on('done', (err, summary) => {
     if (!options.suppressExitCode && (err || summary.run.failures.length)) {
