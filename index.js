@@ -41,19 +41,10 @@ async function init () {
       cookieJar: get('cookieJar')
     }
 
-    if (options.collection.match(idRegex)) {
-      if (!options.apiKey) {
-        core.setFailed('No Postman API key provided for collection retrieval.')
-      }
-      options.collection = `${apiBase}/collections/${options.collection}?apikey=${options.apiKey}`
-    }
-
-    if (options.environment && options.environment.match(idRegex)) {
-      if (!options.apiKey) {
-        core.setFailed('No Postman API key provided for environment retrieval.')
-      }
-      options.environment = `${apiBase}/environments/${options.environment}?apikey=${options.apiKey}`
-    }
+    
+    options.collection = `${apiBase}/collections/${options.collection}?apikey=${options.apiKey}`
+    options.environment = `${apiBase}/environments/${options.environment}?apikey=${options.apiKey}`
+    
     
     const filteredOptions = removeEmpty(options)
     runNewman(filteredOptions)
