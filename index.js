@@ -42,9 +42,6 @@ async function init () {
     }
 
     
-    options.collection = `${apiBase}/collections/${options.collection}?apikey=${options.apiKey}`
-    options.environment = `${apiBase}/environments/${options.environment}?apikey=${options.apiKey}`
-    
     
     const filteredOptions = removeEmpty(options)
     runNewman(filteredOptions)
@@ -88,6 +85,10 @@ function runNewman (options) {
   core.warning(options);
   core.warning(options.environment);
   core.warning(options.collection);
+  
+  options.collection = `${apiBase}/collections/${options.collection}?apikey=${options.apiKey}`
+  options.environment = `${apiBase}/environments/${options.environment}?apikey=${options.apiKey}`
+  
   newman.run(options, (err) => {
     if (err) {
       core.setFailed('Newman run failed!! ' + (err || ''))
