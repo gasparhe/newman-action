@@ -1,72 +1,19 @@
 name: 'Newman Action (version with apiBase)'
-description: 'Run Postman collections via Newman (with apiBase). I will remove this when Matt include these changes' 
-author: 'Matt Ball'
+description: 'testing newman and github' 
+author: 'Gasparhe'
 branding:
   icon: 'check-square'
   color: 'orange'
 inputs:
-  apiBase:
-    description: 'Postman API Base'
-  apiKey:
-    description: 'Postman API key'
   collection:
     description: 'Collection to use'
     required: true
   environment:
     description: 'Environment to use'
-  envVar:
-    description: 'Environment variables'
-  globals:
-    description: 'Globals to use'
-  globalVar:
-    description: 'Global variables'
-  iterationCount:
-    description: 'Number of iterations to run on the collection'
-  iterationData:
-    description: 'Path to CSV or JSON data file'
-  folder:
-    description: 'Name/ID of folders to run instead of entire collection'
-  workingDir:
-    description: 'Path to be used as working directory'
-  insecureFileRead:
-    description: 'Allow reading files outside of working directory'
-  timeout:
-    description: 'Time to wait for the collection run to complete'
-  timeoutRequest:
-    description: 'Time to wait for scripts to return a response'
-  timeoutScript:
-    description: 'Time to wait for scripts to return a response'
-  delayRequest:
-    description: 'Time to wait between subsequent requests'
-  ignoreRedirects:
-    description: 'Follow 3xx responses'
-  insecure:
-    description: 'Disable SSL verification and allow self-signed SSL'
-  bail:
-    description: 'Stop collection run gracefully on error'
-  suppressExitCode:
-    description: 'Always exit cleanly'
-  reporters:
-    description: 'Reporter to use'
-    default: '["cli"]'
-  reporter:
-    description: 'Reporter options'
-  color:
-    description: 'Modify colored CLI output'
-  sslClientCert:
-    description: 'Path to public client certificate'
-  sslClientKey:
-    description: 'Path to secret client key file'
-  sslClientPassphrase:
-    description: 'Secret client key passphrase'
-  sslClientCertList:
-    description: 'The path to the client certificate configuration list file.'
-  sslExtraCaCerts:
-    description: 'The path to the file, that holds one or more trusted CA certificates in PEM format.'
-  requestAgents:
-    description: 'Specify the custom requesting agents to be used when performing HTTP and HTTPS requests respectively.'
-  cookieJar:
-    description: 'Pass a CookieJar file path as string to this property that will be deserialized using tough-cookie.'
+    required: true
+  apiKey:
+    description: 'Postman API key'
+    required: true
 runs:
   using: 'node12'
   main: 'dist/index.js'
