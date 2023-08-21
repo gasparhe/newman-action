@@ -7,12 +7,16 @@ async function init() {
   try {
     const apiBase = 'https://api.getpostman.com';
     const args = process.argv.slice(2);
-    const apiKey = core.getInput('apiKey'); 
+    const apiKey = core.getInput('apiKey');
     const options = {
       collection: core.getInput('collection'),
       environment: core.getInput('environment'),
       reporters: 'cli',
     };
+
+    
+    const allInputs = core.getInputsWithDefaults();
+    console.log('INPUTS :::', allInputs);
 
     options.collection = `${apiBase}/collections/${options.collection}?apikey=${apiKey}`;
     options.bail = true;
