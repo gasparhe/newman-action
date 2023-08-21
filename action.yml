@@ -1,5 +1,5 @@
 name: 'Newman - Postman.'
-description: 'Run a private Postman collection parsing the collectionId, the environmentId and the api key. A Fork from https://github.com/matt-ball/newman-action' 
+description: 'Run a private Postman collection parsing the collection ID, the environment ID, and the API key. A Fork from https://github.com/matt-ball/newman-action' 
 author: 'gasparhe'
 branding:
   icon: 'list'
@@ -15,5 +15,5 @@ inputs:
     description: 'Postman API key'
     required: true
 runs:
-  using: 'node12'
+  using: 'node16'
   main: 'dist/index.js'
