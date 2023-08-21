@@ -1,11 +1,16 @@
 const core = require('@actions/core')
 const newman = require('newman');
 
+function get(key, opts) {
+  const val = core.getInput(key, opts)
+  return val !== '' ? val : null
+}
+
 function runNewman(options) {
   console.log(options);
   console.log(':::::::::::::::');
   const allInputs = core.getInputsWithDefaults();
-    console.log('INPUTS :::', allInputs);
+  console.log('INPUTS :::', allInputs);
   newman
     .run(options, (err) => {
       if (err) {
@@ -28,26 +33,30 @@ async function init() {
 
     const apiBase = 'https://api.getpostman.com';
 
-    
-    const apiKey = process.env('INPUT_APIKEY');
-    const options = {
-      collection: process.env('INPUT_COLLECTION'),
-      environment: process.env('INPUT_ENVIRONMENT'),
+
+    const required = { required: true }
+
+
+    const apiKey = get('apiKey');
+    const optionsO = {
+      collection: get('collection', required),
+      environment: get('environment', required),
       reporters: 'cli',
     };
 
-    
+
     const allInputs = core.getInputsWithDefaults();
     console.log('INPUTS :::', allInputs);
-      core.setOutput('result', core.getInputsWithDefaults());
+    core.setOutput('result', core.getInputsWithDefaults());
 
 
 
-    options.collection = `${apiBase}/collections/${options.collection}?apikey=${apiKey}`;
+    options.collection = `${apiBase}/collections/${optionsO.collection}?apikey=${apiKey}`;
     options.bail = true;
-    options.environment = `${apiBase}/environments/${options.environment}?apikey=${apiKey}`;
+    options.environment = `${apiBase}/environments/${optionsO.environment}?apikey=${apiKey}`;
+    options.reporters = 'cli',
 
-    runNewman(options);
+      runNewman(options);
   } catch (error) {
     core.setFailed(error.message);
   }
