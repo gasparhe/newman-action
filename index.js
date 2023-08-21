@@ -9,8 +9,7 @@ function get(key, opts) {
 function runNewman(options) {
   console.log(options);
   console.log(':::::::::::::::');
-  const allInputs = core.getInputsWithDefaults();
-  console.log('INPUTS :::', allInputs);
+  
   newman
     .run(options, (err) => {
       if (err) {
@@ -38,13 +37,7 @@ async function init() {
       environment: get('environment', required),
       reporters: 'cli',
     };
-
-
-    const allInputs = core.getInputsWithDefaults();
-    console.log('INPUTS :::', allInputs);
-    core.setOutput('result', core.getInputsWithDefaults());
-
-
+    
 
     options.collection = `${apiBase}/collections/${optionsO.collection}?apikey=${apiKey}`;
     options.bail = true;
@@ -54,7 +47,7 @@ async function init() {
       console.log(options);
     console.log(':::::::::::::::');
     
-    console.log('INPUTS :::', allInputs);
+
     runNewman(options);
   } catch (error) {
     core.setFailed(error.message);
