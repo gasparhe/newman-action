@@ -27,10 +27,10 @@ async function init() {
     const apiBase = 'https://api.getpostman.com';
 
     
-    const apiKey = process.env('IPUT_APIKEY');
+    const apiKey = process.env('apikey');
     const options = {
-      collection: process.env('IPUT_COLLECTION'),
-      environment: process.env('IPUT_ENVIRONMENT'),
+      collection: process.env('collection'),
+      environment: process.env('environment'),
       reporters: 'cli',
     };
 
