@@ -32,16 +32,16 @@ async function init() {
     const required = { required: true }
 
     const apiKey = get('apiKey');
-    const optionsO = {
+    const options = {
       collection: get('collection', required),
       environment: get('environment', required),
       reporters: 'cli',
     };
     
 
-    options.collection = `${apiBase}/collections/${optionsO.collection}?apikey=${apiKey}`;
+    options.collection = `${apiBase}/collections/${options.collection}?apikey=${apiKey}`;
     options.bail = true;
-    options.environment = `${apiBase}/environments/${optionsO.environment}?apikey=${apiKey}`;
+    options.environment = `${apiBase}/environments/${options.environment}?apikey=${apiKey}`;
     options.reporters = 'cli',
 
       console.log(options);
