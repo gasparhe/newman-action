@@ -7,15 +7,16 @@ async function init() {
   try {
     const apiBase = 'https://api.getpostman.com';
     const args = process.argv.slice(2);
+    const apiKey = core.getInput('apiKey'); 
     const options = {
-      collection: args[0],
-      environment: args[1],
+      collection: core.getInput('collection'),
+      environment: core.getInput('environment'),
       reporters: 'cli',
     };
 
-    options.collection = `${apiBase}/collections/${options.collection}?apikey=${args[2]}`;
+    options.collection = `${apiBase}/collections/${options.collection}?apikey=${apiKey}`;
     options.bail = true;
-    options.environment = `${apiBase}/environments/${options.environment}?apikey=${args[2]}`;
+    options.environment = `${apiBase}/environments/${options.environment}?apikey=${apiKey}`;
 
     runNewman(options);
   } catch (error) {
