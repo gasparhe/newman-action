@@ -8,8 +8,8 @@ const getOptions = () => {
 
     const apiKey = core.getInput('apiKey', required);
     return {
-      collection:    `${apiBase}/collections/${get('collection', required)}?apikey=${apiKey}`,
-      environment: `${apiBase}/environments/${get('environment', required)}?apikey=${apiKey}`,
+      collection:    `${apiBase}/collections/${core.getInput('collection', required)}?apikey=${apiKey}`,
+      environment: `${apiBase}/environments/${core.getInput('environment', required)}?apikey=${apiKey}`,
       reporters: 'cli',
       bail: true
     };
