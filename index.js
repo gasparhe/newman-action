@@ -30,6 +30,9 @@ async function init() {
 
 function runNewman(options) {
   console.log(options);
+  console.log(':::::::::::::::');
+  const allInputs = core.getInputsWithDefaults();
+    console.log('INPUTS :::', allInputs);
   newman
     .run(options, (err) => {
       if (err) {
