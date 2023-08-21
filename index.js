@@ -29,13 +29,8 @@ async function init() {
   try {
     core.notice('This is a message that will also emit an annotation');
     core.info('This is a message that will also emit an annotation');
-    core.warming('warning message');
-
     const apiBase = 'https://api.getpostman.com';
-
-
     const required = { required: true }
-
 
     const apiKey = get('apiKey');
     const optionsO = {
