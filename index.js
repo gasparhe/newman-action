@@ -23,6 +23,8 @@ function runNewman(options) {
 async function init() {
   try {
     core.notice('This is a message that will also emit an annotation');
+    core.info('This is a message that will also emit an annotation');
+    core.warming('warning message');
 
     const apiBase = 'https://api.getpostman.com';
 
