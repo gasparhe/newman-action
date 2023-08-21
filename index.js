@@ -1,12 +1,28 @@
 const core = require('@actions/core')
 const newman = require('newman');
 
-init();
+function runNewman(options) {
+  console.log(options);
+  console.log(':::::::::::::::');
+  const allInputs = core.getInputsWithDefaults();
+    console.log('INPUTS :::', allInputs);
+  newman
+    .run(options, (err) => {
+      if (err) {
+        core.setFailed('Newman run error!! ' + (err || ''), err);
+      }
+    })
+    .on('done', (err, summary) => {
+      if (!options.suppressExitCode && (err || summary.run.failures.length)) {
+        core.setFailed('Newman run failed! ' + (err || ''), summary?.run?.failures);
+      }
+    });
+}
+
 
 async function init() {
   try {
     const apiBase = 'https://api.getpostman.com';
-    const args = process.argv.slice(2);
     const apiKey = core.getInput('apiKey');
     const options = {
       collection: core.getInput('collection'),
@@ -30,20 +46,4 @@ async function init() {
   }
 }
 
-function runNewman(options) {
-  console.log(options);
-  console.log(':::::::::::::::');
-  const allInputs = core.getInputsWithDefaults();
-    console.log('INPUTS :::', allInputs);
-  newman
-    .run(options, (err) => {
-      if (err) {
-        core.setFailed('Newman run error!! ' + (err || ''), err);
-      }
-    })
-    .on('done', (err, summary) => {
-      if (!options.suppressExitCode && (err || summary.run.failures.length)) {
-        core.setFailed('Newman run failed! ' + (err || ''), summary?.run?.failures);
-      }
-    });
-}
+init();
