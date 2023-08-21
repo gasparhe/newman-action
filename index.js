@@ -22,11 +22,15 @@ function runNewman(options) {
 
 async function init() {
   try {
+    core.notice('This is a message that will also emit an annotation');
+
     const apiBase = 'https://api.getpostman.com';
-    const apiKey = core.getInput('apiKey');
+
+    
+    const apiKey = process.env('IPUT_APIKEY');
     const options = {
-      collection: core.getInput('collection'),
-      environment: core.getInput('environment'),
+      collection: process.env('IPUT_COLLECTION'),
+      environment: process.env('IPUT_ENVIRONMENT'),
       reporters: 'cli',
     };
 
