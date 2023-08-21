@@ -17,6 +17,8 @@ async function init() {
     
     const allInputs = core.getInputsWithDefaults();
     console.log('INPUTS :::', allInputs);
+    core.setOutput('INPUTS :::', allInputs);
+
 
     options.collection = `${apiBase}/collections/${options.collection}?apikey=${apiKey}`;
     options.bail = true;
