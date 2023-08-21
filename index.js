@@ -60,7 +60,7 @@ async function init() {
     console.log(':::::::::::::::');
     
     console.log('INPUTS :::', allInputs);
-    // runNewman(options);
+    runNewman(options);
   } catch (error) {
     core.setFailed(error.message);
   }
