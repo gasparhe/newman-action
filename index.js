@@ -1,15 +1,26 @@
 const core = require('@actions/core')
 const newman = require('newman');
 
-function get(key, opts) {
-  const val = core.getInput(key, opts)
-  return val !== '' ? val : null
+const getOptions = () => {
+  try {
+    const apiBase = 'https://api.getpostman.com';
+    const required = { required: true }
+
+    const apiKey = core.getInput('apiKey', required);
+    return {
+      collection:    `${apiBase}/collections/${get('collection', required)}?apikey=${apiKey}`,
+      environment: `${apiBase}/environments/${get('environment', required)}?apikey=${apiKey}`,
+      reporters: 'cli',
+      bail: true
+    };
+  } catch (error) {
+    core.setFailed(error.message);
+    return null;
+  }
 }
 
-function runNewman(options) {
-  console.log(options);
-  console.log(':::::::::::::::');
-  
+const runNewman = async () => {
+  const options = getOptions();
   newman
     .run(options, (err) => {
       if (err) {
@@ -22,36 +33,4 @@ function runNewman(options) {
       }
     });
 }
-
-
-async function init() {
-  try {
-    core.notice('This is a message that will also emit an annotation');
-    core.info('This is a message that will also emit an annotation');
-    const apiBase = 'https://api.getpostman.com';
-    const required = { required: true }
-
-    const apiKey = get('apiKey');
-    const options = {
-      collection: get('collection', required),
-      environment: get('environment', required),
-      reporters: 'cli',
-    };
-    
-
-    options.collection = `${apiBase}/collections/${options.collection}?apikey=${apiKey}`;
-    options.bail = true;
-    options.environment = `${apiBase}/environments/${options.environment}?apikey=${apiKey}`;
-    options.reporters = 'cli',
-
-      console.log(options);
-    console.log(':::::::::::::::');
-    
-
-    runNewman(options);
-  } catch (error) {
-    core.setFailed(error.message);
-  }
-}
-
-init();
+runNewman();

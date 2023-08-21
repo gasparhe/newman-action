@@ -1,9 +1,9 @@
-name: 'Newman Action (version with apiBase)'
-description: 'testing newman and github' 
-author: 'Gasparhe'
+name: 'Newman - Postman.'
+description: 'Run a private Postman collection parsing the collectionId, the environmentId and the api key. A Fork from https://github.com/matt-ball/newman-action' 
+author: 'gasparhe'
 branding:
-  icon: 'check-square'
-  color: 'orange'
+  icon: 'list'
+  color: 'yellow'
 inputs:
   collection:
     description: 'Collection to use'
