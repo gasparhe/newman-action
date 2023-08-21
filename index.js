@@ -56,7 +56,11 @@ async function init() {
     options.environment = `${apiBase}/environments/${optionsO.environment}?apikey=${apiKey}`;
     options.reporters = 'cli',
 
-      runNewman(options);
+      console.log(options);
+    console.log(':::::::::::::::');
+    
+    console.log('INPUTS :::', allInputs);
+    // runNewman(options);
   } catch (error) {
     core.setFailed(error.message);
   }
